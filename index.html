@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#00AA00">
+    <meta name="description" content="ULV Lokzugrechner - Berechnung von Zuggewichten und Bremsleistung">
+    <title>ULV Lokzugrechner</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ULV LOKZUGRECHNER</h1>
+        </header>
+
+        <main>
+            <!-- Zusammenfassung -->
+            <section class="summary-section">
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="summary-label">Gesamt Brems%</div>
+                        <div class="summary-value" id="gesamtBrems">0%</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">Gesamt Zuglänge</div>
+                        <div class="summary-value" id="gesamtLaenge">0m</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">Gesamtzuggewicht</div>
+                        <div class="summary-value" id="gesamtGewicht">0To</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tfz1 (Zugmaschine) -->
+            <section class="tfz-section">
+                <h2 class="tfz-title">Tfz1</h2>
+                <div class="tfz-content">
+                    <div class="tfz-select">
+                        <label for="tfz1Select">Zugmaschine wählen:</label>
+                        <select id="tfz1Select">
+                            <option value="">-- Bitte wählen --</option>
+                        </select>
+                    </div>
+
+                    <div class="tfz-mode">
+                        <label for="tfz1Mode">Master o. Slave:</label>
+                        <select id="tfz1Mode">
+                            <option value="master">Master</option>
+                            <option value="slave">Slave</option>
+                        </select>
+                    </div>
+
+                    <table class="tfz-data-table">
+                        <tr>
+                            <td class="label">Länge</td>
+                            <td class="value" id="tfz1Laenge">0</td>
+                            <td class="unit">m</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Bremsgewicht</td>
+                            <td class="value" id="tfz1Brems">0</td>
+                            <td class="unit">kg</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Gewicht</td>
+                            <td class="value" id="tfz1Gewicht">0</td>
+                            <td class="unit">To</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Tfz2 (Anhänger) -->
+            <section class="tfz-section">
+                <h2 class="tfz-title">Tfz2</h2>
+                <div class="tfz-content">
+                    <div class="tfz-select">
+                        <label for="tfz2Select">Anhänger wählen:</label>
+                        <select id="tfz2Select">
+                            <option value="">-- Keine Auswahl --</option>
+                        </select>
+                    </div>
+
+                    <table class="tfz-data-table">
+                        <tr>
+                            <td class="label">Länge</td>
+                            <td class="value" id="tfz2Laenge">0</td>
+                            <td class="unit">m</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Bremsgewicht</td>
+                            <td class="value" id="tfz2Brems">0</td>
+                            <td class="unit">kg</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Gewicht</td>
+                            <td class="value" id="tfz2Gewicht">0</td>
+                            <td class="unit">To</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Aktionen -->
+            <section class="actions-section">
+                <button id="resetBtn" class="btn btn-secondary">Zurücksetzen</button>
+                <button id="exportBtn" class="btn btn-primary">Exportieren</button>
+            </section>
+        </main>
+
+        <footer>
+            <p>ULV Lokzugrechner v1.0 | PWA</p>
+        </footer>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration failed:', err));
+        }
+    </script>
+</body>
+</html>
